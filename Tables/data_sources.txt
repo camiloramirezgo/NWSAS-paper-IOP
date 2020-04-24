@@ -1,0 +1,10 @@
+Layer	Coverage	Format	Resolution	Year	Source
+Population*	Algeria, Tunisia, Libya	raster (tif)	100 m grid cell	2015	\cite{Worldpop2012}
+Depth to groundwater*	Africa	txt table	5 km grid cell	2012	\cite{Quantitativemapsgroundwater2012a}
+Administrative boundaries	Africa	shapefile	Individual country polygons	2017	\cite{Humanitarian2017}
+Administrative boundaries	Algeria, Tunisia, Libya	shapefile	Level 1 (provinces) polygons	2015	\cite{GADM}
+Transboundary aquifers borders	Global	shapefile	Individual polygons	2015	\cite{IGRAC}
+Groundwater quality	NWSAS Basin	data points	206 data points	2016	Regional authorities
+Digital Elevation Data*	Africa	raster (tif)	1, 3 and 15 arc second	2014	\cite{DEM2014}
+Land cover*	Africa	raster (tif)	20 m grid cell	2016	\cite{ESA2017}
+Aquifer boundaries	NWSAS basin	shapefile	Individual polygons	-	Regional authorities

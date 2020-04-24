@@ -1,0 +1,109 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    INSTITUTE OF PHYSICS PUBLISHING                                   %
+%                                                                      %
+%   `Preparing an article for publication in an Institute of Physics   %
+%    Publishing journal using LaTeX'                                   %
+%                                                                      %
+%    LaTeX source code `ioplau2e.tex' used to generate `author         %
+%    guidelines', the documentation explaining and demonstrating use   %
+%    of the Institute of Physics Publishing LaTeX preprint files       %
+%    `iopart.cls, iopart12.clo and iopart10.clo'.                      %
+%                                                                      %
+%    `ioplau2e.tex' itself uses LaTeX with `iopart.cls'                %
+%                                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+% First we have a character check
+%
+% ! exclamation mark    " double quote  
+% # hash                ` opening quote (grave)
+% & ampersand           ' closing quote (acute)
+% $ dollar              % percent       
+% ( open parenthesis    ) close paren.  
+% - hyphen              = equals sign
+% | vertical bar        ~ tilde         
+% @ at sign             _ underscore
+% { open curly brace    } close curly   
+% [ open square         ] close square bracket
+% + plus sign           ; semi-colon    
+% * asterisk            : colon
+% < open angle bracket  > close angle   
+% , comma               . full stop
+% ? question mark       / forward slash 
+% \ backslash           ^ circumflex
+%
+% ABCDEFGHIJKLMNOPQRSTUVWXYZ 
+% abcdefghijklmnopqrstuvwxyz 
+% 1234567890
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\documentclass[12pt]{iopart}
+\newcommand{\gguide}{{\it Preparing graphics for IOP Publishing journals}}
+%Uncomment next line if AMS fonts required
+%\usepackage{iopams}  
+\usepackage{hyperref,tikz,array}
+\usepackage[export]{adjustbox}
+\usepackage{gensymb,eurosym}
+\usepackage[numbers]{natbib}
+\usepackage[inline]{enumitem}
+\usepackage[all]{hypcap}
+\pdfminorversion=4
+\graphicspath{{Images/}}
+\newcolumntype{P}{>{\raggedright\arraybackslash}p}
+\usetikzlibrary{arrows.meta, shapes.geometric}
+\newcommand{\rpm}{\raisebox{.3ex}{$\scriptstyle\pm$}}
+\hypersetup{hidelinks}
+
+\begin{document}
+\title[Reusing wastewater in agriculture: a Nexus assessment in the NWSAS]{Reusing wastewater for agricultural irrigation: a Nexus assessment in the North Western Sahara Aquifer System}
+
+\author{Camilo Ramirez $^{1}$, Youssef Almulla $^{1}$, and Francesco Fuso-Nerini $^{1}$}
+
+\address{$^{1}$ KTH Royal Institute of Technology, Stockholm, Sweden}
+\ead{camilorg@kth.se}
+\vspace{10pt}
+\begin{indented}
+\item[]\today
+\end{indented}
+
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+% Uncomment for keywords
+\vspace{2pc}
+\noindent{\it Keywords}: Water-Energy-Food Nexus, wastewater as a resource, agricultural sustainability, NWSAS, GIS-based modelling.
+
+% Uncomment for Submitted to journal title message
+% \submitto{\ERL}
+%
+% Uncomment if a separate title page is required
+%\maketitle
+% 
+% For two-column output uncomment the next line and choose [10pt] rather than [12pt] in the \documentclass declaration
+% \ioptwocol
+%
+\section{Introduction}
+\input{introduction}
+
+\newpage
+\section{Methodology}
+\input{methodology}
+
+\section{Results}
+\input{results}
+
+\section{Discussion}
+O the discussion  explain well how the findings are relevant for the region, but for other regions in the world as well. This can be covered on a broader perspective of the nexus and touch on the circularity of the resources also mentioning the potential for nutrient recovery and energy generation (cite paper from UNIFLORES). Touch some examples as the Egyptian one, on wastewater resource management. The main story-line here is that by capturing treating and reusing wastewater, a more circular use of the resource is being used, accounting for several uses. The potential connection with SDGs could also be mentioned, as SDG for water and sanitation, SDG for energy, SDG for helth and SDG for partnership. The land use and water recovery systems can be analysed, pointing at the interlinkage between land use and water storage. Also analyse the implications on water and food security, both for the region an in a wider context. Then talk about the implications on energy consumption and the connection with climate change due to the high fossil fuel based power sector of the region. Finally finish by acknowledging the potential of treating and reusing wastewater, but the need of having strong water management and pricing mechanisms coupled with technological improvements on agricultural practices as well as the perception of wastewater as a resource, so water stress can be really alleviated in the region and more generally in the world. 
+
+\section{Conclusion}
+
+\newpage
+\newcommand{\newblock}{}
+\bibliography{References}
+\bibliographystyle{unsrtnat}
+
+\end{document}
+

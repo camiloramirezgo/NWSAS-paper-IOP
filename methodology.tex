@@ -1,4 +1,5 @@
-The methods used in this study follow those of the framework presented in \cite{ramirezgomezTechnoeconomicGISbasedModel2018}, with some key additions and improvements. The summary of the methodology and methods is presented in \fref{fig:framework}.
+% The methods used in this study follow those of the framework presented in \cite{ramirezgomezTechnoeconomicGISbasedModel2018}, with some key additions and improvements. The summary of the methodology and methods is presented in \fref{fig:framework}.
+The methods used in this study can be divided into water-related, energy-related and cost-related, with additional supporting processes (\fref{fig:framework}). GIS tools were widely used throughout the analysis, and a general model and case study runner for the NWSAS where developed using Python and hosted in a \href{https://github.com/camiloramirezgo/NWSAS-paper-model}{\textbf{Github repository}}.
 
 \begin{figure*}[!h]
 	\centering
@@ -93,7 +94,7 @@ In addition, a sensitivity analysis was performed on the groundwater quality and
 %     }
 % \end{table*}
 
-The most up-to-date open source data available was collected and processed using the open source Geographic Information System software QGIS. A data package comprising the geospatial characteristics of the study area was created, in order to capture key information to make the WEF nexus analysis possible. The relevant layers are identified and described in \tref{tbl:datasources}.
+The most up-to-date open source data available was collected and processed using the open source software QGIS. A data package comprising the geospatial characteristics of the study area was created, in order to capture key information to make the WEF nexus analysis possible. The relevant layers are identified and described in \tref{tbl:datasources}.
 
 % All data layers were converted into matching units, re-projected into the Sud Algerie Degree projection (ESRI: 102592)---This projection was selected as it produces minimal distortions in the analysis area---, re-scaled to the same resolution and, when only individual data points were available, interpolated to extend the data to the entire analysed area (i.e. for the Groundwater quality layer). Furthermore, all layers were merged into a large data frame.
 
@@ -218,7 +219,7 @@ The Groundwater Stress Indicator was used to quantify the current stress of the 
 % Where $Q_{ww,yr}$ represents the yearly treated wastewater in m\textsuperscript{3}/yr, and $X_t$ the average energy demand of the specific WWTT $t$, to treat one m\textsuperscript{3} of wastewater (in kWh/m\textsuperscript{3}).
 
 \subsection{Clustering algorithm}\label{Sc:clustering}
-A clustering approach was used in order to identify dense areas where a WWTS could be implemented, minimizing constraints imposed by existent large distances among scatter population or irrigated lands. A hierarchical clustering  algorithm was run using the \textit{Agglomerative Clustering} object from the Python \textit{scikit-learn} package \cite{scikit-learn}.
+A clustering approach was used in order to identify dense areas where a wastewater treatment system could be implemented, minimizing constraints imposed by existent large distances among scatter population or irrigated lands. A hierarchical clustering  algorithm was run using the \textit{Agglomerative Clustering} object from the Python \textit{scikit-learn} package \cite{scikit-learn}.
 % Such algorithm relies on a bottom-up approach to define the clusters, in which all data points are first identified as an individual cluster, to be then successively merged together. The linkage criteria used was the \textit{ward} linkage.
 
 \subsection{Wastewater Treatment System characteristics}
@@ -228,7 +229,7 @@ A clustering approach was used in order to identify dense areas where a WWTS cou
 
 % Statistical methods have shown to be commonly used among cost-modelling for wastewater management \cite{Costmodellingwastewater2011,Assessmentwastewatertreatment2012,Economicfeasibility2012}. Such methods use available cost figures (i.e. historical or estimated cost figures of actual WWTPs as capacity, pollutants treated, etc.) to create cost functions that adjust the cost relevant data to independent variables, describing the behaviour of a dependent variable (i.e. CAPEX and OPEX). The resulting cost function, allows to evaluate the capital and operational costs, often in terms of wastewater flow or served population equivalent \cite{Economicvaluationwastewater2015}. One advantage of this approach from a GIS perspective, is that with the use of non-linear cost functions, the effect of economies of scale can be easily evaluated. Furthermore, as a top-down approach enables for a better understanding of the relationship among variables and wastewater management, it constitutes a scientific approach for new wastewater services planning \cite{Costmodellingwastewater2011}. 
 
-Wastewater pollutant levels, were assumed to be constant throughout the basin, using standard values based on studies from FAO \cite{fao1985water}. The assumed pollutant levels for population wastewater and the required levels for reused TWW, are shown in \tref{tbl:pollutans}.
+Wastewater pollutant levels, were assumed to be constant throughout the basin, using standard values based on studies from FAO \cite{fao1985water}. The assumed pollutant levels for population wastewater and the required levels for reused treated wastewater, are shown in \tref{tbl:pollutans}.
 
 % \begin{table*}[!ht]
 % 	\caption{\label{tbl:pollutans}Pollutant levels of wastewater and treated wastewater (mg/l).}
@@ -247,18 +248,18 @@ Wastewater pollutant levels, were assumed to be constant throughout the basin, u
 % 	\end{indented}
 % \end{table*}
 
-Statistical methods have shown to be commonly used in cost-modelling for wastewater management \cite{Costmodellingwastewater2011,Assessmentwastewatertreatment2012,Economicfeasibility2012}, thus, cost functions were used to estimate CAPEX and OPEX values for the different WWTT. However, technology specific cost functions were not available for the NWSAS basin area, nor statistical data to develop them. Therefore, based on the work of \citet{Assessmentwastewatertreatment2012} cost functions for different WWTT in Spain were used to evaluate the competence of selected technologies in the NWSAS (see \tref{tbl:treatmentsystems}). Energy intensity characteristics were added for each technology according to \cite{Energypatternanalysis2012,ComparativeAnalysisEnergy2017}.
+Statistical methods have shown to be commonly used in cost-modelling for wastewater management \cite{Costmodellingwastewater2011,Assessmentwastewatertreatment2012,Economicfeasibility2012}, thus, cost functions were used to estimate CAPEX and OPEX values for the different Wastewater Treatment Technologies (WWTTs). However, technology specific cost functions were not available for the NWSAS basin area, nor statistical data to develop them. Therefore, based on the work of \citet{Assessmentwastewatertreatment2012} cost functions for different WWTT in Spain were used to evaluate the competence of selected technologies in the NWSAS (see \tref{tbl:treatmentsystems}). Energy intensity characteristics were added for each technology according to \cite{Energypatternanalysis2012,ComparativeAnalysisEnergy2017}.
 
 % \input{Tables/treatment_techs}
 
-\subsection{Levelised Cost of Water (LCOW)}
+\subsection{Levelised Cost of Water}
 A proposed LCOW method was used as metric to compare cost-effectiveness among WWTTs. The LCOW assesses the life-cycle cost of delivering one unit (e.g. one cubic meter) of treated wastewater, based on all physical assets and resources required. This concept, is inherited from the LCOE methodology, which applies the same life-cost analysis for one unit of electricity output \cite{prospectscostcompetitive2013}. The LCOW method follows the logic of the LCOE method \cite{prospectscostcompetitive2013,GeospatialLevelizedCost2015}, with pertinent adjustments to the variables used in wastewater treatment systems. Then, the LCOW can be expressed as follows:
 
 \begin{equation}\label{eq:lcow}
 LCOW = LCOW_{Inv} + LCOW_{O\&M} + LCOW_{Ext}
 \end{equation}
 
-The expression presented in \eref{eq:lcow}, disaggregates the $LCOW$ (\$/m\textsuperscript{3}) value in three components: the cost components due to investment $LCOW_{Inv}$, operation and maintenance $LCOW_{O\&M}$ and externalities $LCOW_{Ext}$. As the CAPEX function comprises all investment components of a WTTP, it enables an easy calculation of the $LCOW_{Inv}$ for each WWTT and each region or cluster. \Eref{eq:lcow_inv} describes the process to calculate the $LCOW_{Inv}$.
+The expression presented in \eref{eq:lcow}, disaggregates the $LCOW$ (\$/m\textsuperscript{3}) value in three components: the cost components due to investment $LCOW_{Inv}$, operation and maintenance $LCOW_{O\&M}$ and externalities $LCOW_{Ext}$. As the CAPEX function comprises all investment components of a wasteater treatment plant, it enables an easy calculation of the $LCOW_{Inv}$ for each WWTT and each region or cluster. \Eref{eq:lcow_inv} describes the process to calculate the $LCOW_{Inv}$.
 
 \begin{equation}\label{eq:lcow_inv}
 LCOW_{Inv} = \frac{Inv}{\sum_{t=1}^{T} V_{t}\cdot\gamma^{t}}\cdot\Delta

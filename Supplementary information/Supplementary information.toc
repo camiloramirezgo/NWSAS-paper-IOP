@@ -1,0 +1,15 @@
+\contentsline {section}{\numberline {1}Geographic Information Systems analysis}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Land-cover and cropland area datasets}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Population dataset}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Depth to groundwater dataset}{5}{subsection.1.3}
+\contentsline {section}{\numberline {2}Data calibration}{5}{section.2}
+\contentsline {section}{\numberline {3}Population and irrigation water withdrawals}{6}{section.3}
+\contentsline {section}{\numberline {4}Groundwater pumping}{6}{section.4}
+\contentsline {section}{\numberline {5}Energy-for-wastewater}{7}{section.5}
+\contentsline {section}{\numberline {6}Wastewater Treatment System characteristics}{7}{section.6}
+\contentsline {section}{\numberline {7}Reverse Osmosis desalination}{8}{section.7}
+\contentsline {section}{\numberline {8}Levelised Cost of Water (LCOW)}{10}{section.8}
+\contentsline {section}{\numberline {9}Clusters}{11}{section.9}
+\contentsline {section}{\numberline {10}Water extractions and reuse per cluster}{12}{section.10}
+\contentsline {section}{\numberline {11}Energy demand per cluster}{20}{section.11}
+\contentsfinish 

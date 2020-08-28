@@ -1,9 +1,0 @@
-Technology	Contaminants	Costs	Water
-Pond System (PS)	N: 20–40 \newline P: 60–70 \newline COD: 60–96 \newline SS: 50–90	CAPEX: $3897.7\cdot x^{-0.407}$ \newline OPEX: $5.543\cdot x + 3127.5$\newline **Energy: $0.19\cdot V$	Irrigation tailwater
-Intermittent Sand Filter (ISF)	N: 65–95 \newline P: 75–99 \newline COD: 75–90 \newline SS: 85–95	CAPEX: $2115.5\cdot x^{-0.399}$ \newline OPEX: $12.026\cdot x+3518.9$\newline **Energy: $0.2\cdot V$	Population wastewater
-Trickling Filter (TF)	N: 35–50 \newline P: 35–55 \newline COD: 75–90 \newline SS: 50–90	CAPEX: $12237\cdot x^{-0.87}$ \newline OPEX: $13.504\cdot x+6020$ \newline **Energy: $0.3\cdot V$	Population wastewater
-Moving Bed Biofilm Reactor (MBBR)	N: 10–20 \newline P: 30–40 \newline COD: 20–40 \newline SS: 60–80	CAPEX: $1187\cdot x^{-0.165}$ \newline OPEX: $12.794\cdot x+6031$\newline **Energy: $0.8\cdot V$	Population wastewater
-Rotating Biological Contractors (RBC)	N: 20–80 \newline P: 10–30 \newline COD: 70–93 \newline SS: 75–98	CAPEX: $6931.4\cdot x^{-0.383}$ \newline OPEX: $313.4\cdot x^{-0.435}$\newline **Energy: $0.8\cdot V$	Population wastewater
-Membrane Bioreactor (MBR)	N: 50–90 \newline P: 20–70 \newline COD: 70–90 \newline SS: 85–99	CAPEX: $5635.3\cdot x^{-0.352}$\newline *OPEX: $2.116\cdot V^{0.713}e^{1.51\cdot SS+0.037\cdot BOD}$\newline **Energy: $0.8\cdot V$	Population wastewater
-Extended Aeration (EA)	N: 50–90 \newline P: 15–70 \newline COD: 70–90 \newline SS: 85–99	CAPEX: $7946\cdot x^{-0.460}$ \newline *OPEX: $169.48\cdot V^{0.454}e^{0.61\cdot SS}$\newline **Energy: $0.6\cdot V$	Population wastewater
-Sequencing Batch Reactor (SBR)	N: 55–90 \newline P: 25–70 \newline COD: 70–90 \newline SS: 85–99	CAPEX: $8258.9\cdot x^{-0.407}$ \newline OPEX: $309.4\cdot x^{-0.389}$\newline **Energy: $1\cdot V$	Population wastewater

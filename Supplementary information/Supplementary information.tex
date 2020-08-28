@@ -6,6 +6,9 @@
 \usepackage[numbers]{natbib}
 \usepackage[inline]{enumitem}
 \usepackage[all]{hypcap}
+\usepackage{longtable}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
 \pdfminorversion=4
 \graphicspath{{Images/}}
 \newcolumntype{P}{>{\raggedright\arraybackslash}p}
@@ -13,6 +16,8 @@
 \newcommand{\rpm}{\raisebox{.3ex}{$\scriptstyle\pm$}}
 \hypersetup{hidelinks}
 
+\dottedcontents{section}[2.9em]{\bfseries}{2.6em}{1pc}
+\dottedcontents{subsection}[6em]{}{3em}{1pc}
 
 \begin{document}
 \title[\textit{SI} - Reusing wastewater in agriculture: a Nexus assessment in the NWSAS]{\textit{Supplementary information}\\[12pt] \large Reusing wastewater for agricultural irrigation: a Nexus approach for Sustainable Development in the North Western Sahara Aquifer System}
@@ -27,8 +32,12 @@
 \item[]\today
 \end{indented}
 
+\tableofcontents
+
 \section{Geographic Information Systems analysis}
-\begin{table*}[!b]
+\markboth{\textit{SI} - Reusing wastewater in agriculture: a Nexus assessment in the NWSAS}{}
+Geospatial characteristics of the NWSAS were obtained from open sources as described in  \tref{tbl:datasources}. All data layers were converted into matching units, re-projected into the Sud Algerie Degree projection (ESRI: 102592)---This projection was selected as it produces minimal distortions in the analysis area---, re-scaled to the same resolution and, when only individual data points were available, interpolated to extend the data to the entire analysed area (i.e. for the Groundwater quality layer). Furthermore, all layers were merged into a large data frame.
+\begin{table*}[!h]
 	\caption{\label{tbl:datasources}Geographic Information System data sources}
 	{\footnotesize
 		\begin{tabular*}{\textwidth}{@{}P{1.4in} P{1in} l P{1.2in} l l@{}}
@@ -50,7 +59,62 @@
 		~* Regional Authorities.
 	}
 \end{table*}
-Geospatial characteristics of the NWSAS were obtained from open sources as described in  \tref{tbl:datasources}. All data layers were converted into matching units, re-projected into the Sud Algerie Degree projection (ESRI: 102592)---This projection was selected as it produces minimal distortions in the analysis area---, re-scaled to the same resolution and, when only individual data points were available, interpolated to extend the data to the entire analysed area (i.e. for the Groundwater quality layer). Furthermore, all layers were merged into a large data frame.
+
+\subsection{Land-cover and cropland area datasets}
+\autoref{fig:landcover} shows the land-cover dataset used for the region. This data was developed by the Land Cover project of the ESA Climate Change Initiative, and consist of a 20$\times$20 m resolution raster for the entire continent of Africa \cite{ESA2017}. It classifies land-cover into nine categories: \begin{enumerate*}[label=\upshape(\arabic*\upshape)]
+	\item Trees cover area, 
+	\item Shrubs cover area,
+	\item Grassland,
+	\item Cropland,
+	\item Vegetation aquatic or regularly flooded,
+	\item Lichen Mosses/Sparse vegetation,
+	\item Bare areas,
+	\item Built up areas, and
+	\item Open water.
+\end{enumerate*}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{NWSAS_Landcover}
+	\caption[NWSAS land-cover map]{North Western Sahara Aquifer System - Land-cover map at 20$\times$20 meters grid cell resolution.}
+	\label{fig:landcover}
+\end{figure}
+
+\begin{figure}[!b]
+	\centering
+	\includegraphics[width=0.88\textwidth, cfbox=black 1pt 0pt]{NWSAS_Irrigated_area}
+	\caption[NWSAS cropland density map]{North Western Sahara Aquifer System - Cropland density map at 1$\times$1 km grid cell resolution.}
+	\label{fig:irrigated_area}
+\end{figure}
+
+From this dataset, some insights can already be obtained. Bare/desertic areas dominate the region, while open water bodies are quite uncommon, however, the water bodies found in the NWSAS region do not constitute ``fresh water" resources due to their high content of salinity \cite{CHAOUKI20131043}. The built up areas are highly scattered throughout the NWSAS region as well as the cropland zones, which are mainly located in the surroundings of the built up areas and in the north of the region. The largest agricultural activity, is given at the north of the three countries, as well as the major urban concentrations, nonetheless, this does not make the NWSAS region less important, as the groundwater resources there, are crucial for ensuring food security for a growing population in the region.
+
+From this land-cover dataset, the cropland areas were subtracted, allowing to create a raster layer containing the cropland density in the region. This layer was created for a resolution of 1km grid cell and calibrated for year 2015 according to regional statistics presented in \autoref{tbl:regionalstats}. The obtained cropland dataset is showcased in \autoref{fig:irrigated_area}.
+
+From \autoref{fig:irrigated_area}, it is depicted with more clarity that the main agricultural activity is in fact, presented in the northern region. The provinces with largest agricultural activity are: Biskra, El Oued, Djelfa, Laghouat, Khenchela, Adrar and Gharda\"\i a in Algeria; Kebili, Tozeur and Gafsa in Tunisia; and Al Marqab, Misratah and Al Jufrah in Libya.
+
+\subsection{Population dataset}
+Individual population datasets for Algeria, Tunisia and Libya were obtained from the WorldPop database \cite{Worldpop} in a resolution of 100$\times$100 meters. Afterwards, the three datasets were merged together and masked within the boundaries of the aquifer. The data was then rescaled to a 1 km grid cell resolution and calibrated for year 2015 according to regional statistics (refer to \autoref{tbl:regionalstats}).
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.88\textwidth, cfbox=black 1pt 0pt]{NWSAS_Population}
+	\caption[NWSAS population map]{North Western Sahara Aquifer System - Population density map at 1$\times$1 km grid cell resolution.}
+	\label{fig:population}
+\end{figure}
+
+\autoref{fig:population} depicts the obtained population layer for the NWSAS region. It is clear that the population agglomerations follow the same location pattern as the cropland areas: scattered through the region with higher concentrations at north of the aquifer. Within Algeria, the provinces with major population count are: Biskra , El Oued, Ouargla, Laghouat, Gharda\"\i a, Adrar and Djelfa. As for Tunisia, Kebili, Tozeur and Gafsa present the higher population counts, although much lower than the Algerian provinces previously mentioned. Moreover, the provinces with higher population count within Libya are Al Marqab, Misratah and Al Jabal al Gharbi.
+
+\subsection{Depth to groundwater dataset}
+The depth to groundwater dataset used, was developed by the British Geological Survey for the African continent at a resolution of 5km grid cell. This dataset is underpinned by dedicated case studies and systematic data and literature reviews \cite{Quantitativemapsgroundwater2012a}. The dataset was masked with the NWSAS boundaries and aligned to match the target 1km grid cell resolution (\autoref{fig:depth}).
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.88\textwidth, cfbox=black 1pt 0pt]{NWSAS_Depth}
+	\caption[NWSAS depth to groundwater map]{North Western Sahara Aquifer System - Depth to groundwater map at 1$\times$1 km grid cell resolution.}
+	\label{fig:depth}
+\end{figure}
+
+According to this data, it can be seen that the depth to groundwater through the entire aquifer ranges from around 50 to more than 250 meters. In general, in the south of the aquifer the deepest water tables can be found, which could mainly affect the population and agricultural activity of the province of Adrar and part of the provinces of Ouargla and Gharda\"\i a. To the north of the basin, the water table levels decrease to a range between 50 to 100 meters, which can be argued, enables the high agricultural activity there, specially in the province of Biskra.
 
 \section{Data calibration}
 The \textit{population} and the \textit{irrigated area} layers were calibrated to match regional statistics. The calibration was performed using the fraction given between the regional statistical data (i.e. total population or total irrigated area), and the sum of all data points of the layer in question. The statistical data was available as per country basis. Thus, the calibration process was performed for the basin areas within each country, using their specific information (see \tref{tbl:regionalstats}).
@@ -88,6 +152,15 @@ E = \frac{Q\cdot(\rho\cdot g\cdot(H - h))}{\eta}
 \end{equation}
 
 Where $Q$ stands for the water extractions (m\textsuperscript{3}), $\rho$ for the water density (kg/m\textsuperscript{3}), $g$ for the gravitational acceleration (m/s\textsuperscript{2}), $H$ for the delivered hydraulic head (meters), and $h$ for the head in the well (meters). Moreover, $\eta$ accounts for the pumping efficiency, which was set as 85\% along the entire aquifer.
+
+\section{Energy-for-wastewater}\label{Sc:eww}
+To calculate the energy-for-wastewater requirements an energy intensity factor was used for each evaluated treatment technology following \eref{eq:energy-for-wastewater}.
+
+\begin{equation}\label{eq:energy-for-wastewater}
+E_{ww} = Q_{ww,yr}\cdot X_t
+\end{equation}
+
+Where $Q_{ww,yr}$ represents the yearly treated wastewater in m\textsuperscript{3}/yr, and $X_t$ the average energy demand of the specific WWTT $t$, to treat one m\textsuperscript{3} of wastewater (in kWh/m\textsuperscript{3}).
 
 \section{Wastewater Treatment System characteristics}
 FAO standards for population wastewater pollutant levels and reused water quality for agricultural irrigation \cite{fao1985water}, were used for the entire NWSAS area. These are shown in \tref{tbl:pollutans}.
@@ -142,8 +215,6 @@ The minimum energy required to push the water through the membrane is given by t
 
 Thus, the minimum energy demand can be estimated multiplying the osmotic pressure of the \textit{feed} water $\pi$ (in bar) by a conversion factor of 1.0 kWh/m\textsuperscript{3} = 36 bar. In reality, the energy demanded is greater due to factors as friction losses, membrane filtration resistance, among others. However, this approach has been used in cases were no specific data of the RO system is available \cite{KARABELAS201815}.
 
-The water quality layer used, was obtained from 206 measurements provided by National Authorities of the region. Each point specifies the spacial location and groundwater TDS content. Although the data did not covered the entire basin area, due to lack of any other related information it was used to produced a raster layer. An inverse distance weighted interpolation method, having as distance weighting factor an inverse distance to a power of 2 and a global search radius with maximum number of nearest points of 10 was used (see \fref{fig:TDS}).
-
 \begin{figure*}[!h]
 	\centering
 	\includegraphics[width=0.88\textwidth, cfbox=black 1pt 0pt]{NWSAS_TDS}
@@ -151,14 +222,192 @@ The water quality layer used, was obtained from 206 measurements provided by Nat
 	\label{fig:TDS}
 \end{figure*}
 
-\section{Energy-for-wastewater}\label{Sc:eww}
-To calculate the energy-for-wastewater requirements an energy intensity factor was used for each evaluated treatment technology following \eref{eq:energy-for-wastewater}.
+The water quality layer used, was obtained from 206 measurements provided by National Authorities of the region. Each point specifies the spacial location and groundwater TDS content. Although the data did not covered the entire basin area, due to lack of any other related information it was used to produced a raster layer. An inverse distance weighted interpolation method, having as distance weighting factor an inverse distance to a power of 2 and a global search radius with maximum number of nearest points of 10 was used (see \fref{fig:TDS}).
 
-\begin{equation}\label{eq:energy-for-wastewater}
-E_{ww} = Q_{ww,yr}\cdot X_t
+\section{Levelised Cost of Water (LCOW)}
+\autoref{eq:lcow}, disaggregates the $LCOW$ (\$/m\textsuperscript{3}) value in three components: the cost components due to investment $LCOW_{Inv}$, operation and maintenance $LCOW_{O\&M}$ and externalities $LCOW_{Ext}$.
+
+\begin{equation}\label{eq:lcow}
+LCOW = LCOW_{Inv} + LCOW_{O\&M} + LCOW_{Ext}
 \end{equation}
 
-Where $Q_{ww,yr}$ represents the yearly treated wastewater in m\textsuperscript{3}/yr, and $X_t$ the average energy demand of the specific WWTT $t$, to treat one m\textsuperscript{3} of wastewater (in kWh/m\textsuperscript{3}).
+All investment components used, need to be comprised in the CAPEX function of each WWTT. This enables the use of the values calculated with the CAPEX functions of each WWTT for each region or cluster, to easily calculate the $LCOW_{Inv}$ values for each specific technology and region/cluster. \autoref{eq:lcow_inv} describes the process to calculate the $LCOW_{Inv}$.
+
+\begin{equation}\label{eq:lcow_inv}
+LCOW_{Inv} = \frac{Inv}{\sum_{t=1}^{T} V_{t}\cdot\gamma^{t}}\cdot\Delta
+\end{equation}
+
+Where $Inv$ stands for the CAPEX value, $V_{t}$ for the treated water flow per year $t$ (m\textsuperscript{3}/yr), $\Delta$ for the tax factor (\autoref{eq:delta}) and $\gamma^{t}$ represents the discount factor of the project (\autoref{eq:gamma}).
+
+The discount factor is an important term, as the LCOW methodology represents a break-even investment for the stakeholders, thus an appropriate discount rate ($r$) needs to be used to ensure the right amount of return needed for all sources of long term capital (i.e. equity holders and debt). Often, the proper discount rate used is the WACC \cite{prospectscostcompetitive2013}. The discount factor is then calculated according to the discount rate $r$, as shown in \eref{eq:gamma}. A discount rate of $r=4\%$ was used for this study.
+
+\begin{equation}\label{eq:gamma}
+\gamma^{t} = \left(\frac{1}{1+r}\right)^{t}
+\end{equation}
+
+The tax factor $\Delta$ includes all effects of the tax related variables, these being the rent tax $\alpha$, depreciation $d_t$, depreciation period $T$, discount factor $\gamma$ and investment tax credit $i$. \autoref{eq:delta} describes the way of obtaining the tax factor.
+
+\begin{equation}\label{eq:delta}
+\Delta = \frac{1 - i - \alpha\cdot\sum_{t=1}^{T}d_{t}\cdot\gamma^{t}}{1 - \alpha}
+\end{equation}
+
+Moreover, the LCOW related to operational costs $LCOW_{O\&m}$ (\autoref{eq:lcow_om}) can be computed by using the OPEX values $\omega_{t}$ calculated for each year, in each region/cluster --- using the cost-functions of each WWTT evaluated---the treated water flow $V_{t}$ (m\textsuperscript{3}/yr) and the discount factor $\gamma^t$ per year.
+
+\begin{equation}\label{eq:lcow_om}
+LCOW_{O\&m} = \frac{\sum_{t=1}^{T} \omega_{t}\cdot V_{t}\cdot\gamma^{t}}{\sum_{t=1}^{T} V_{t}\cdot\gamma^{t}}
+\end{equation}
+
+Furthermore, the avoidance of externalities due to the discharge of untreated wastewater to the environment can also be included in the LCOW value, which may help to render a WWTP economically viable. The logic behind this idea, falls in the fact that by treating and reusing wastewater, the pollutants presented in the contaminated water streams are prevented to run into fresh water bodies, rivers or groundwater aquifers. Thus, by  defining a monetary value to the prevention of pollutants going into ecosystems, the economic environmental benefits can be internalised \cite{Assessmentwastewatertreatment2012}. The externalities-related LCOW value $LCOW_{Ext}$ (\autoref{eq:lcow_ext}) can be obtained as follows:
+
+\begin{equation}\label{eq:lcow_ext}
+LCOW_{Ext} = \frac{\sum_{p}^{P}\sum_{t=1}^{T} m_{p}\cdot B_p\cdot V_{t}\cdot\gamma^{t}}{\sum_{t=1}^{T} V_{t}\cdot\gamma^{t}}
+\end{equation}
+
+Where $m_p$ represents the concentration of pollutant of class $p$ avoided with the treatment of one cubic meter of wastewater (kg/m\textsuperscript{3}), and $B_p$ the environmental benefit of avoiding one kilogram of pollutant $p$ running into the environment (\$/kg).
+
+\section{Clusters}
+The 40 population and cropland clusters identified are presentd in \autoref{fig:clusters}. 
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.88\textwidth, cfbox=black 1pt 0pt]{NWSAS_clusters}
+	\caption{Population and cropland clusters.}
+	\label{fig:clusters}
+\end{figure} 
+
+Clusters are numbered from 0 to 39, yielding 40 agglomerations including each population and cropland areas. Every cluster is tagged with a number and colored to make them stand out from others.
+
+
+\section{Water extractions and reuse per cluster}
+Figure \autoref{fig:BaselineWater} shows the water extractions for agricultural irrigation and population consumption per cluster fo the Baseline scenario. 
+
+Cluster 7 represents by far, the largest amount of water extractions, this cluster is a combination of population and agricultural irrigation areas from the Al Marqab and Misratah provinces in Libya. It is followed by cluster 8 comprising mainly agricultural irrigation areas of the Khenchela province in Algeria. Then follows cluster 13 and 25 from the northern part of Algerian portion of the basin and cluster 15 of the Al Marqab province in Libya.
+
+All points inside the Biskra province are subdivided into clusters number 13, 31, 39 and 3, which combined represent the major water extractions of the region. However when analysed individually, their impact is reduced, being cluster 13 the most representative.
+
+Overall, Algeria accounts for most of the water extractions, comprising clusters 8, 13, 25, 31, 3 and 26, which rank inside the 10 highest water consumers. 
+
+The activity of Tunisia inside the basin is low in comparison with the other two countries. The most representative cluster is number 30 in Kebili, ranking 6 in water extractions.
+
+\newpage
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{BaselineWater2}
+	\caption{Water extractions by cluster. Baseline scenario.}
+	\label{fig:BaselineWater}
+\end{figure}\newpage
+
+In figure \autoref{fig:SubAgLowPopWater} the extractions per sector and treated wastewater reused by source is shown for each cluster for the Subsidized agricultural water and low population water scenario. The clusters, are organized from high to low value of total water extractions.
+
+Again, cluster 7 represents the largest amount of water extractions. It is followed by clusters 15, 8, 25 and 13. It is interesting to notice that the rankings of those clusters in the overall water extractions, changed from the Baseline to the subsidized scenario with water reuse.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{Sub_agri_water_Low_pop_water}
+	\caption{Water extractions and reuse by cluster. Subsidized agricultural water extractions and low population water demand scenario. At left: reused water after reclaim, treatment and allocation classified by population and irrigation source. At right: overall water extractions classified by population and irrigation use.}
+	\label{fig:SubAgLowPopWater}
+\end{figure}
+\newpage
+
+Figure \autoref{fig:SubAgHighPopWater} shows water extractions for the Subsidized agricultural water and high population water scenario. It presents an almost exact behaviour as the previous case, with slightly higher extractions due to the higher population demand and some clusters swaping places in the low ends as clusters 38 and 1.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{Sub_agri_water_High_pop_water}
+	\caption{Water extractions and reuse by cluster. Subsidized agricultural water extractions and high population water demand scenario. At left: reused water after reclaim, treatment and allocation classified by population and irrigation source. At right: overall water extractions classified by population and irrigation use.}
+	\label{fig:SubAgHighPopWater}
+\end{figure}
+\newpage
+
+Figure \autoref{fig:FreeAgLowPopWater} shows water extractions for the free agricultural water and low population water scenario. It presents an almost exact behaviour as the subsidez case, but with higher extractions due to the lower agricultural water demand. Again some clusters swaped places as clusters 13 and 25.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{Free_agri_water_Low_pop_water}
+	\caption{Water extractions and reuse by cluster. Free agricultural water extractions and low population water demand scenario. At left: reused water after reclaim, treatment and allocation classified by population and irrigation source. At right: overall water extractions classified by population and irrigation use.}
+	\label{fig:FreeAgLowPopWater}
+\end{figure}
+\newpage
+
+Figure \autoref{fig:FreeAgHighPopWater} shows water extractions for the free agricultural water and high population water scenario. It presents an almost exact behaviour as the previous case, but with slightly higher extractions due to the higher population demand.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{Free_agri_water_High_pop_water}
+	\caption{Water extractions and reuse by cluster. Free agricultural water extractions and high population water demand scenario. At left: reused water after reclaim, treatment and allocation classified by population and irrigation source. At right: overall water extractions classified by population and irrigation use.}
+	\label{fig:FreeAgHighPopWater}
+\end{figure}
+\newpage
+
+Finally, water extraction for the private agricutural regime and low to high population water demand, are presented in figures \ref{fig:PrivAgLowPopWater} and \ref{fig:PrivAgHighPopWater} respectively. Water extractions are much lower in this scenario compared to the free agricultural water scenarios, however the diferences are not that high with the subsidized ones. This is due to the higher amount of available water for reuse in the subsidized scenarios, which can be seen in the left part of the graphs. Furthermore, the clusters rankings were the same as for the subsidezed cases.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{Priv_agri_water_Low_pop_water}
+	\caption{Water extractions and reuse by cluster. Private agricultural water extractions and low population water demand scenario. At left: reused water after reclaim, treatment and allocation classified by population and irrigation source. At right: overall water extractions classified by population and irrigation use.}
+	\label{fig:PrivAgLowPopWater}
+\end{figure}
+\newpage
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{Priv_agri_water_High_pop_water}
+	\caption{Water extractions and reuse by cluster. Private agricultural water extractions and high population water demand scenario. At left: reused water after reclaim, treatment and allocation classified by population and irrigation source. At right: overall water extractions classified by population and irrigation use.}
+	\label{fig:PrivAgHighPopWater}
+\end{figure} 
+\newpage
+
+\section{Energy demand per cluster}
+In this section, additional results concerning the energy requirements for water pumping, water desalination and wastewater treatment are presented.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{BaselineEnergyPerCluster}
+	\caption{Annual energy demand by cluster in the Baseline scenario.}
+	\label{fig:BaselineEnergyPerCluster}
+\end{figure} 
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{SubAgLowPopEnergyPerCluster}
+	\caption{Annual energy demand by cluster in the subsidized agricultural water and low population water scenario.}
+	\label{fig:SubAgLowPopEnergyPerCluster}
+\end{figure}\newpage
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{SubAgHighPopEnergyPerCluster}
+	\caption{Annual energy demand by cluster in the subsidized agricultural water and high population water scenario.}
+	\label{fig:SubAgHighPopEnergyPerCluster}
+\end{figure} 
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{FreeAgLowPopEnergyPerCluster}
+	\caption{Annual energy demand by cluster in the free agricultural water and low population water scenario.}
+	\label{fig:FreeAgLowPopEnergyPerCluster}
+\end{figure}\newpage
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{FreeAgHighPopEnergyPerCluster}
+	\caption{Annual energy demand by cluster in the free agricultural water and high population water scenario.}
+	\label{fig:FreeAgHighPopEnergyPerCluster}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{PrivAgLowPopEnergyPerCluster}
+	\caption{Annual energy demand by cluster in the private agricultural water and low population water scenario.}
+	\label{fig:PrivAgLowPopEnergyPerCluster}
+\end{figure}\newpage
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{PrivAgHighPopEnergyPerCluster}
+	\caption{Annual energy demand by cluster in the private agricultural water and high population water scenario.}
+	\label{fig:PrivAgHighPopEnergyPerCluster}
+\end{figure}
+
 
 \newcommand{\newblock}{}
 \bibliography{References}

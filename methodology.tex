@@ -1,62 +1,107 @@
-The methods used in this study can be divided into water-related, energy-related and cost-related, with additional supporting processes (\fref{fig:framework}). GIS tools were widely used throughout the analysis, and a general model and case study runner for the NWSAS where developed using Python and hosted in a \href{https://github.com/camiloramirezgo/NWSAS-paper-model}{\textbf{Github repository}}.
+% The methods used in this study are briefly described and listed in order of execution in \tref{tbl:methods}. Furthermore, detailed explanations of key concepts are presented throughout the rest of the section. 
+GIS-based methods were selected to model the current state of the basin and evaluate treated wastewater reuse scenarios. By incorporating the spatial distribution of resources in WEF Nexus modelling and preventing aggregation of spatial scales, more robust analytical analysis tackling the intersection of all three resources can be achieved, providing better insights for planning and decision making \cite{shannakMovingTheoryPractice2018,albrechtWaterEnergyFoodNexusSystematic2018}. This concept gains even more importance in the context of the transboundary nature of the NWSAS basin.
 
-\begin{figure*}[!h]
-	\centering
-	\includegraphics[width=\textwidth]{Framework}
-	\caption{Methodology flow diagram---blue boxes indicate water-related methods, red boxes energy-related methods, gray boxes cost and LCOW related methods, orange boxes supporting methods and the yellow cylinders scenario characteristics data.}
-	\label{fig:framework}
-\end{figure*}
+The most up-to-date open source data available was collected and processed using the open source software QGIS \cite{QGIS2020}. The relevant layers are identified and described in \textit{section 1} of the \textit{supplementary information}. A general model and case study runner for the NWSAS where developed using Python and hosted in an open-source \href{https://github.com/camiloramirezgo/NWSAS-paper-model}{\textbf{Github repository}} which ensures the complete reproducibility of the results.
 
-The analyzed system consisted of: extracting water from groundwater resources, desalinating brackish water when needed, supplying water demand for domestic and agricultural irrigation purposes, reclaiming domestic wastewater and agricultural drainage (i.e. tailwater), treating reclaimed wastewater, and reusing treated wastewater in agricultural irrigation. A schematic of the system is presented in \fref{fig:systemreuse}.
+Throughout this section, the methods used to characterise the current state of the aquifer (Baseline scenario) are presented, descriptions of the scenarios evaluated are provided, along with the methods used and a schematic representation of the overall system. Finally, detailed explanations of key modelling processes are given.
+
+% \begin{figure*}[!h]
+% 	\centering
+% 	\includegraphics[width=\textwidth]{Framework}
+% 	\caption{Methodology flow diagram---blue boxes indicate water-related methods, red boxes energy-related methods, gray boxes cost and LCOW related methods, orange boxes supporting methods and the yellow cylinders scenario characteristics data.}
+% 	\label{fig:framework}
+% \end{figure*}
+
+\subsection{Characterizing the Baseline scenario}
+\begin{table*}[!b]
+    \caption{\label{tbl:methodsBaseline}Brief description and enumeration of methods used for the Baseline scenario in order of execution.}
+	\footnotesize{
+	\begin{tabular}{@{}l P{1.1in} P{1.2in} P{3.12in}}
+		\br
+		\# & Method & Systems involved & Description\\
+		\mr
+	    1. & Data calibration & Residential and agriculture & Geospatial population count and irrigated cropland extend calibrated according to provincial statistics\\
+	    2. & Water demand & Residential and agriculture & Based on population water consumption per capita and spatial irrigation water needs per hectare (according to crop evapotranspiration) \\
+	    3. & Water withdrawals & Groundwater aquifer, residential and agriculture & Calculate water withdrawals from the groundwater aquifer, based on demand from the residential and agricultural sectors. No water reuse is accounted here\\
+	    4. & Groundwater stress indicator & Groundwater aquifer & Estimate geospatially the current ground water indicator based on the water extractions and the recharge rate of the aquifer\\
+	    5. & Estimate pumping energy & Groundwater aquifer & Based on total water withdrawals from the aquifer and the depth to groundwater of each spatial location \\
+		\br
+	\end{tabular}
+	}
+\end{table*}
+\Tref{tbl:methodsBaseline} presents the five main steps performed in order to estimate the water demand from residential uses and agricultural irrigation, calculate the resultant energy requirements for water pumping and assess the stress levels on the aquifer due to over-extraction of water.
+
+Water requirements for population consumption and agricultural irrigation were assumed to be supplied by the groundwater aquifer. The recharge rate $R$ for the entire aquifer was taken as 1.1 billion cubic meters of water per year, which for the area of the aquifer, is an equivalent water column of 1.06 mm per year \cite{BetterValorizationIrrigation2015}. Furthermore, no environmental flow was considered. Finally, water desalination and wastewater treatment were not part of this scenario, as currently is the main reality on the basin.
+
+Water demand for residential use was estimated using a low level water demand per capita of 55 m\textsuperscript{3}/year \cite{Householdwaterconsumption2014}, representative of the habits of the water scarce region. The agricultural irrigation requirements were taken from provincial specific data derived from \cite{Socioeconomicaspectsirrigation2014}. Details of such data is provided in the \textit{supplementary information}.
+
+\subsection{Wastewater treatment and reuse scenarios}
+The treated wastewater reuse system analyzed consists of: 1) extracting water from groundwater resources, 2) desalinating brackish water when needed, 3) supplying water demand for domestic and agricultural irrigation purposes, 4) reclaiming domestic wastewater and agricultural drainage (i.e. tailwater), 5) treating reclaimed wastewater, and 6) reusing treated wastewater in agricultural irrigation. A schematic of the system is presented in \fref{fig:systemreuse}.
 
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\textwidth]{System_reuse}
-	\caption{NWSAS components and resource streamflows - WWR scenarios.}
+	\caption{NWSAS systems, energy and water resource flows. The blocks represent the different systems, the arrows the water flows, the voltage icons the systems that require energy, and the numbers the order of processes.}
 	\label{fig:systemreuse}
 \end{figure*}
 
-All water requirements for population consumption and agricultural irrigation were assumed to be supplied by the groundwater aquifer and that such water is desalinated whenever the TDS levels are above 1,000 mg/l \cite{fao1985water} (according to \textit{section 7} of the \textit{supplementary information}). Afterwards, the water is allocated for population consumption and agricultural irrigation. The recharge rate $R$ for the entire aquifer was taken as 1.1 billion cubic meters of water per year, which for the area of the aquifer, is an equivalent water column of 1.06 mm per year \cite{BetterValorizationIrrigation2015}. Furthermore, no environmental flow was considered.
+Water desalination was set to be needed whenever the TDS levels are above 1,000 mg/l, which ensure low impact levels on cropland production \cite{fao1985water} (More details on \textit{section 7} of the \textit{supplementary information}). A further sensitivity analysis on such threshold was performed (see \autoref{sec:sensitivity}).
 
-Six wastewater treatment and reuse scenarios were analyzed, evaluating three irrigation water pricing regimes and two levels of population water consumption (see \tref{tbl:scenarios}). Irrigation water pricing regimes were taken from \cite{Socioeconomicaspectsirrigation2014}, were it was found that the irrigation water demand per hectare throughout the NWSAS basin is heavily dependent on the supply water cost. 
+Four wastewater treatment and reuse scenarios were analyzed, evaluating the Baseline plus water reuse and three irrigation water pricing regimes plus reuse (see \tref{tbl:scenarios}). Irrigation water pricing regimes were taken from \cite{Socioeconomicaspectsirrigation2014}, were it was found that the irrigation water demand per hectare throughout the NWSAS basin is heavily dependent on the supply water cost. 
 
 \begin{table*}[!ht]
-    \caption{\label{tbl:scenarios}Scenario descriptions.}
+    \caption{\label{tbl:scenarios}Description of scenarios based on agricultural water use behaviour. Based on information from \cite{Socioeconomicaspectsirrigation2014}.}
 	\footnotesize{
-	\begin{tabular}{@{}l P{4.1in}}
+	\begin{tabular*}{\textwidth}{@{}l P{5.3in}}
 		\br
 		Scenario & Description\\
 		\mr
-		Baseline & The Baseline scenario is constructed with average yearly values of irrigation water consumption for each portion of the basin withing each country, being: Algeria 13,520 m\textsuperscript{3}/ha, Tunisia 13,266 m\textsuperscript{3}/ha and Libya 9,134 m\textsuperscript{3}/ha \cite{Socioeconomicaspectsirrigation2014}. Moreover, a low population water demand was used \cite{Householdwaterconsumption2014} (see below).\\
-		Private agricultural water & Private farmers that pay the full price of water without any subsidy. The average level of water demand is around 10,512 m\textsuperscript{3}/ha \cite{Socioeconomicaspectsirrigation2014}. The \citet{Socioeconomicaspectsirrigation2014} found, that farmers belonging to this regime, have higher water productivity.\\ 
-		Subsidized agricultural water & Users that have access to water subsidized to some extent. The average water demand is 15,334 m\textsuperscript{3}/ha \cite{Socioeconomicaspectsirrigation2014}.\\
-		Free agricultural water & Farmers that have free access to water, meaning that the government fully subsidize the price of water and that the resource can be utilized without limitations. The average irrigation water demand is 21,215 m\textsuperscript{3}/ha \cite{Socioeconomicaspectsirrigation2014}.\\
-		High population water & An average water consumption per capita of 73 m\textsuperscript{3}/year \cite{Householdwaterconsumption2014}.\\
-		Low population water & An average water consumption per capita of 55 m\textsuperscript{3}/year \cite{Householdwaterconsumption2014}.\\
+		Baseline & The Baseline scenario is constructed with average yearly values of irrigation water consumption for each province within the basin, being on average for each country part: Algeria 13,520 m\textsuperscript{3}/ha, Tunisia 13,266 m\textsuperscript{3}/ha and Libya 9,134 m\textsuperscript{3}/ha \cite{Socioeconomicaspectsirrigation2014}. Detailed information about the provincial data used can be found in the \textit{supplementary information}. Moreover, a population water demand of 55 m\textsuperscript{3} per capita was used \cite{Householdwaterconsumption2014}.\\
+		Scenario 1 & This scenario assumes the same behavior as the Baseline, but implements the wastewater treatment and reuse in irrigation measure. \cite{Householdwaterconsumption2014}.\\
+		Scenario 2 & Private farmers that pay the full price of water without any subsidy. The average level of water demand is around 10,512 m\textsuperscript{3}/ha \cite{Socioeconomicaspectsirrigation2014}. The \citet{Socioeconomicaspectsirrigation2014} found, that farmers belonging to this regime, have higher water productivity. Moreover, the same population water demand of 55 m\textsuperscript{3} per capita was used and the wastewater treatment and reuse in irrigation measure.\\ 
+		Scenario 3 & Users that have access to water subsidized to some extent (``collective" networks). The average water demand is 15,334 m\textsuperscript{3}/ha \cite{Socioeconomicaspectsirrigation2014}. Moreover, the same population water demand of 55 m\textsuperscript{3} per capita was used and the wastewater treatment and reuse in irrigation measure.\\
+		Scenario 4 & Farmers that have free access to water, meaning that the government fully subsidize the price of water and that the resource can be utilized without limitations. The average irrigation water demand is 21,215 m\textsuperscript{3}/ha \cite{Socioeconomicaspectsirrigation2014}. Moreover, the same population water demand of 55 m\textsuperscript{3} per capita was used and the wastewater treatment and reuse in irrigation measure.\\
+% 		High population water & An average water consumption per capita of 73 m\textsuperscript{3}/year \cite{Householdwaterconsumption2014}.\\
+% 		Low population water & An average water consumption per capita of 55 m\textsuperscript{3}/year \cite{Householdwaterconsumption2014}.\\
 		\br
-	\end{tabular}
+	\end{tabular*}
 	}
 \end{table*}
 
 It is worth noting that the large water demand increase seen in the subsidized and free regimes compared to the private regime, suggests a strong price elasticity of the irrigation water demand and/or the use of lower efficiency irrigation technologies in such regimes \cite{Socioeconomicaspectsirrigation2014}.
 
-In addition, a sensitivity analysis was performed on the groundwater quality and depth to groundwater levels, in order to asses the impact they pose to the energy-for-water requirements (\tref{tbl:sensitivy}). This parameters were selected, as the water security of the aquifer highly depends on the water table levels and the quality of the resource, directly affecting food security as well.
+The same five steps used to characterize the Baseline were used for the treated wastewater reuse scenarios (see \tref{tbl:methodsBaseline}), plus 9 additional steps which assessed the WEF impact of reusing treated wastewater on the basin (\tref{tbl:methodsScenarios}).
 
-\begin{table}[!ht]
-	\caption{\label{tbl:sensitivy}Sensitivity parameters.}
-	\begin{indented}
-	\item[]\begin{tabular}{@{}l l l l}
+\begin{table*}[!ht]
+    \caption{\label{tbl:methodsScenarios}Brief description and enumeration of additional methods used for the wastewater treatment and reuse scenarios (in order of execution).}
+	\footnotesize{
+	\begin{tabular}{@{}l P{1.1in} P{1.2in} P{3.12in}}
 		\br
-		Parameter & Low & middle & high\\
+		\# & Method & Systems involved & Description\\
 		\mr
-		Groundwater quality & -10 meters & current level & +10 meters\\
-		Depth to groundwater & -50\% & current level & +50\%\\
+	    6. & Desalination energy requirements & Desalination system & Minimum energy requirements to desalinate using the Reverse Osmosis (RO) process. The TDS content of the water and the water withdrawals of each location are used \\
+	    \ms
+	    7. & Clustering & Residential and agricultural sectors & Clusters of population and cropland extent points are identified\\
+	    \ms
+	    8. & Reclaimed, treated and reused wastewater & Residential, agriculture and wastewater treatment system & Estimates the available wastewater to be reclaimed. Losses are subtracted and available treated wastewater is computed for each cluster \\
+	    \ms
+	    9. & CAPEX and OPEX estimation & Residential, agriculture and wastewater treatment system & The Capital Expenditure (CAPEX) and the Operational Expenses (OPEX) of each evaluated wastewater treatment system are calculated for each cluster \\
+	    \ms
+	    10. & LCOW estimation & Wastewater treatment system & The levelized Cost of Water (LCOW) is calculated for each wastewater treatment system in each cluster\\
+	    \ms
+	    11. & Least-cost option & Wastewater treatment system & The least-cost wastewater treatment options are identified in each cluster\\
+	    \ms
+	    12. & Recalculate water withdrawals & Groundwater aquifer, residential, agriculture and wastewater treatment system & Based on water demand  from the residential and agricultural sectors and the available treated wastewater for reuse in agriculture in each cluster\\
+	    \ms
+	    13. & Recalculate groundwater stress & Groundwater aquifer & New groundwater stress indicator based on new water withdrawals after treated water reuse in agriculture \\
+	    \ms
+	    14. & Recalculate pumping and desalination energy & Groundwater aquifer and desalination system & Recalculate pumping and desalination energy requirements for new water withdrawals from the aquifer after treated wastewater reuse in agriculture\\
+	    \ms
+	    15. & Wastewater treatment energy & Wastewater treatment system & Calculate the energy requirements for wastewater treatment of the least-cost treatment systems selected in each cluster\\
 		\br
 	\end{tabular}
-	\end{indented}
-\end{table}
-
-The most up-to-date open source data available was collected and processed using the open source software QGIS \cite{QGIS2020}. A data package comprising the geospatial characteristics of the study area was created, in order to capture key information to make the Nexus analysis possible. The relevant layers are identified and described in \textit{section 1} of the \textit{supplementary information}.
+	}
+\end{table*}
 
 \subsection{Reclaimed wastewater and reused treated wastewater}
 The amount of residential recoverable wastewater, was assumed to represent around 70\% of the total residential water consumed \cite{unescoWastewaterUntappedResource2017}. From that share, an additional 10\% was assumed to be lost in the capture, conveyance and treatment processes.
@@ -70,16 +115,15 @@ The Groundwater Stress Indicator was used to quantify the current stress of the 
 \subsection{Clustering algorithm}\label{Sc:clustering}
 A clustering approach was used in order to identify dense areas where a wastewater treatment system could be implemented, minimizing constraints imposed by existent large distances among scatter population or irrigated lands. A hierarchical clustering  algorithm was run using the \textit{Agglomerative Clustering} object from the Python \textit{scikit-learn} package \cite{scikit-learn}.
 
-\begin{figure*}[!b]
-    \centering
-	\includegraphics[width=0.88\textwidth, cfbox=black 1pt 0pt]{NWSAS_clusters}
-	\caption{Population and cropland clusters. Clusters are numbered from 0 to 39, yielding 40 agglomerations including each population and cropland areas. Every cluster is tagged with a number and colored to make them stand out from others. The grey administrative boundaries correspond to the different provinces.}
-	\label{fig:clusters}
-\end{figure*}
+% \begin{figure*}[!b]
+%     \centering
+% 	\includegraphics[width=0.88\textwidth, cfbox=black 1pt 0pt]{NWSAS_clusters}
+% 	\caption{Population and cropland clusters. Clusters are numbered from 0 to 39, yielding 40 agglomerations including each population and cropland areas. Every cluster is tagged with a number and colored to make them stand out from others. The grey administrative boundaries correspond to the different provinces.}
+% 	\label{fig:clusters}
+% \end{figure*}
 
-Forty clusters were created (\Fref{fig:clusters}) in the process, which succeeded in identifying dense agglomerations. When compared with a traditional approach of performing an analysis on a province basis, the clusters achieved a reduction of 347\% on the overall distance between points.
-
-This is especially important in larger provinces with substantial population and agricultural activity as Adrar, Ghardaïa, Ouargla el Oued and Misratah. Moreover, with this approach, the administrative border constraint is eliminated, as can be seen with cluster number 9 where the agglomeration shares areas from the Ouargla and El Oued provinces.
+Forty clusters were created in the process, which succeeded in identifying dense agglomerations. When compared with a traditional approach of performing an analysis on a province basis, the clusters achieved a reduction of 347\% on the overall distance between points. This is especially important in larger provinces with substantial population and agricultural activity as Adrar, Ghardaïa, Ouargla el Oued and Misratah. Detailed maps of the identified clusters are available in the \textit{supplementary information}.
+% Moreover, with this approach, the administrative border constraint is eliminated, as can be seen with cluster number 9 where the agglomeration shares areas from the Ouargla and El Oued provinces.
 
 \subsection{Wastewater Treatment System characteristics}
 Wastewater pollutant levels, were assumed to be constant throughout the basin, using standard values based on studies from FAO \cite{fao1985water}. The assumed pollutant levels for population wastewater and the required levels for reused treated wastewater, are shown in \textit{section 6} of the \textit{supplementary information}.
@@ -108,3 +152,20 @@ LCOW_{O\&m} = \frac{\sum_{t=1}^{T} \omega_{t}\cdot V_{t}\cdot\gamma^{t}}{\sum_{t
 \end{equation}
 
 Furthermore, the avoidance of externalities due to discharge of untreated wastewater into ecosystems, can be accounted by estimating the effects that pollutants presented in wastewater and tailwater stream flows can have into fresh water bodies, rivers or groundwater aquifers (see section 8 of the \textit{supplementary information} for more detail) \cite{Assessmentwastewatertreatment2012}. However, due to lack of information of environmental effects of wastewater pollutants in the region, this parameter was not considered.
+
+\subsection{Sensitivity analysis}\label{sec:sensitivity} %TODO: Add othe sensitivity variables (population water, TDS threshold, cropland area expansion, discount rate)
+In addition, a sensitivity analysis was performed on the groundwater quality and depth to groundwater levels, in order to asses the impact they pose to the energy-for-water requirements (\tref{tbl:sensitivy}). This parameters were selected, as the water security of the aquifer highly depends on the water table levels and the quality of the resource, directly affecting food security as well.
+
+\begin{table}[!ht]
+	\caption{\label{tbl:sensitivy}Sensitivity parameters.}
+	\begin{indented}
+	\item[]\begin{tabular}{@{}l l l l}
+		\br
+		Parameter & Low & middle & high\\
+		\mr
+		Groundwater quality & -10 meters & current level & +10 meters\\
+		Depth to groundwater & -50\% & current level & +50\%\\
+		\br
+	\end{tabular}
+	\end{indented}
+\end{table}

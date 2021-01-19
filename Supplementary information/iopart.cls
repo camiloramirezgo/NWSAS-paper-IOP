@@ -564,9 +564,9 @@
   \endgroup}
 % 
 \long\def\@makecaption#1#2{\vskip \abovecaptionskip 
- \begin{indented}
- \item[]{\bf #1.} #2
- \end{indented}\vskip\belowcaptionskip}
+\footnotesize
+{\bf #1.} #2
+\vskip\belowcaptionskip}
 \let\@portraitcaption=\@makecaption
 
 \DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
